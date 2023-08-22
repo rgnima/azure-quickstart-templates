@@ -1,0 +1,25 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'PagoxUso1(72dacff6-af55-44ac-a95c-68b3c39138d1)'
+    subscriptionId: '72dacff6-af55-44ac-a95c-68b3c39138d1'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'TEST'
+    location: 'East US 2'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/demos/web-app-regional-vnet-private-endpoint-sql-storage/azuredeploy.json'
+    csmParametersFileLink: 'https://raw.githubusercontent.com/rgnima/azure-quickstart-templates/master/demos/web-app-regional-vnet-private-endpoint-sql-storage/azuredeploy.parameters.json'
+    deploymentMode: 'Incremental'
+    deploymentName: 'testARMtemplate'
